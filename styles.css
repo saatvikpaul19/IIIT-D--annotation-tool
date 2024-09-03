@@ -1,0 +1,176 @@
+/* Container styling */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Roboto', sans-serif;
+    padding: 20px;
+    max-width: 800px;
+    margin: auto;
+    background-color: #1e1e1e; /* Dark background color */
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* Darker shadow */
+}
+
+/* Header styling */
+header h1 {
+    margin-bottom: 20px;
+    color: #f5f5f5; /* Light text color */
+    font-size: 24px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Main section styling */
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+/* Upload section styling */
+.upload-section {
+    margin-bottom: 20px;
+}
+
+/* Canvas section styling */
+.canvas-section {
+    width: 100%;
+    border: 2px solid #4a90e2; /* Bright border color */
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    background-color: #2c2c2c; /* Darker background */
+}
+
+/* Canvas styling */
+canvas {
+    max-width: 100%;
+    height: auto;
+    border: none;
+    display: block;
+}
+
+/* Annotation controls styling */
+.annotation-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+    background-color: #2c2c2c; /* Darker background */
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Darker shadow */
+}
+
+.annotation-controls label {
+    margin: 5px 0;
+    color: #f5f5f5; /* Light text color */
+    font-weight: bold;
+}
+
+.annotation-controls input {
+    padding: 8px;
+    margin-bottom: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 4px;
+    border: 1px solid #444; /* Dark border color */
+    background-color: #333; /* Dark input background */
+    color: #f5f5f5; /* Light text color */
+}
+
+.annotation-controls button {
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    background-color: #4a90e2; /* Bright button color */
+    color: #fff; /* White text */
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.annotation-controls button:hover {
+    background-color: #357abd; /* Darker button color on hover */
+}
+
+/* Annotations list styling */
+.annotations-list {
+    width: 100%;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.annotations-list h2 {
+    margin-bottom: 10px;
+    color: #f5f5f5; /* Light text color */
+    font-size: 20px;
+    border-bottom: 2px solid #4a90e2; /* Bright border color */
+    padding-bottom: 5px;
+}
+
+.scrollable {
+    max-height: 150px;
+    overflow-y: auto;
+    border: 1px solid #444; /* Dark border color */
+    padding: 10px;
+    background-color: #333; /* Dark background */
+    border-radius: 5px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1); /* Inset shadow */
+}
+
+.annotation {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #2a2a2a; /* Dark background */
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Darker shadow */
+}
+
+.annotation p {
+    margin: 5px 0;
+    color: #f5f5f5; /* Light text color */
+}
+
+.annotation button {
+    margin-right: 10px;
+    cursor: pointer;
+    background-color: #dc3545; /* Red button color */
+    color: #fff; /* White text */
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    transition: background-color 0.3s ease;
+}
+
+.annotation button:hover {
+    background-color: #c82333; /* Darker red on hover */
+}
+
+/* Navigation button styling */
+#annotationsNav {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+#annotationsNav button {
+    background-color: #28a745; /* Green button color */
+    color: #fff; /* White text */
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    transition: background-color 0.3s ease;
+}
+
+#annotationsNav button:hover {
+    background-color: #218838; /* Darker green on hover */
+}
+
+/* Download links section */
+#downloadLinks {
+    margin-top: 20px;
+}

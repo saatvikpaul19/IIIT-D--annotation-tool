@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Annotation Tool</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Image Annotation Tool</h1>
+        </header>
+        <main>
+            <!-- Image Upload Section -->
+            <section class="upload-section">
+                <input type="file" id="imageInput" accept="image/*">
+            </section>
+
+            <!-- Image Display Section -->
+            <section class="canvas-section">
+                <canvas id="imageCanvas"></canvas>
+            </section>
+
+            <!-- Annotation Input Section -->
+            <section class="annotation-controls">
+                <label for="periodInput">Period:</label>
+                <input type="text" id="periodInput" placeholder="Enter period">
+                <label for="modernTextInput">Modern Indic Alphabet:</label>
+                <input type="text" id="modernTextInput" placeholder="Enter modern indic alphabet">
+                <label for="iastInput">IAST Alphabet:</label>
+                <input type="text" id="iastInput" placeholder="Enter IAST alphabet">
+                <label for="indicScriptInput">Indic Script:</label>
+                <input type="text" id="indicScriptInput" placeholder="Enter indic script">
+                <button id="addAnnotation"><i class="fas fa-plus-circle"></i> Add Annotation</button>
+                <button id="saveAnnotations"><i class="fas fa-save"></i> Save Annotations & Image</button>
+                <label for="folderNameInput">Folder Name:</label>
+                <input type="text" id="folderNameInput" placeholder="Enter folder name">
+            </section>
+
+            <!-- Annotations List Section -->
+            <section class="annotations-list">
+                <h2>Annotations</h2>
+                <div id="annotationsNav">
+                    <button id="prevAnnotation"><i class="fas fa-chevron-left"></i> Previous</button>
+                    <button id="nextAnnotation">Next <i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div id="annotationsList" class="scrollable"></div>
+            </section>
+
+            <!-- Download Links Section -->
+            <section id="downloadLinks"></section>
+        </main>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+        <script src="script.js"></script>
+    </div>
+</body>
+</html>
