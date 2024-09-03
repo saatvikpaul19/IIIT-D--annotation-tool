@@ -54,8 +54,8 @@ function startDrawing(event) {
     }
     isDrawing = true;
     let rect = canvas.getBoundingClientRect();
-    startX = (event.clientX - rect.left) / zoomLevel;
-    startY = (event.clientY - rect.top) / zoomLevel;
+    startX = (event.clientX - rect.left) * (canvas.width / rect.width);
+    startY = (event.clientY - rect.top) * (canvas.height / rect.height);
     currentAnnotation = {};
 }
 
@@ -63,8 +63,8 @@ function startDrawing(event) {
 function draw(event) {
     if (!isDrawing) return;
     let rect = canvas.getBoundingClientRect();
-    let mouseX = (event.clientX - rect.left) / zoomLevel;
-    let mouseY = (event.clientY - rect.top) / zoomLevel;
+    let mouseX = (event.clientX - rect.left) * (canvas.width / rect.width);
+    let mouseY = (event.clientY - rect.top) * (canvas.height / rect.height);
     let width = mouseX - startX;
     let height = mouseY - startY;
 
@@ -80,8 +80,8 @@ function stopDrawing(event) {
     if (!isDrawing) return;
     isDrawing = false;
     let rect = canvas.getBoundingClientRect();
-    let mouseX = (event.clientX - rect.left) / zoomLevel;
-    let mouseY = (event.clientY - rect.top) / zoomLevel;
+    let mouseX = (event.clientX - rect.left) * (canvas.width / rect.width);
+    let mouseY = (event.clientY - rect.top) * (canvas.height / rect.height);
     let width = mouseX - startX;
     let height = mouseY - startY;
 
@@ -108,6 +108,7 @@ function stopDrawing(event) {
     ctx.lineWidth = 2;
     ctx.strokeRect(currentAnnotation.left, currentAnnotation.top, currentAnnotation.width, currentAnnotation.height);
 }
+
 
 // Function to Add Annotation
 function addAnnotation() {
