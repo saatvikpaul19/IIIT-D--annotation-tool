@@ -109,7 +109,6 @@ function stopDrawing(event) {
     ctx.strokeRect(currentAnnotation.left, currentAnnotation.top, currentAnnotation.width, currentAnnotation.height);
 }
 
-
 // Function to Add Annotation
 function addAnnotation() {
     if (!currentAnnotation.left && !currentAnnotation.top && !currentAnnotation.width && !currentAnnotation.height) {
@@ -259,7 +258,7 @@ function drawImage() {
     ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
 }
 
-// Function to Save Annotations and Image
+// Function to Save Annotations and Image with Crops
 function saveAnnotations() {
     if (annotations.length === 0) {
         alert("No annotations to save.");
@@ -267,6 +266,9 @@ function saveAnnotations() {
     }
 
     let imageName = document.getElementById('imageInput').files[0].name;
+    let baseName = imageName.split('.').slice(0, -1).join('.');
+    
+    // Prepare main JSON data
     let data = {
         image: imageName,
         annotations: annotations
@@ -275,15 +277,47 @@ function saveAnnotations() {
     // Prepare ZIP file containing the image and JSON
     let zip = new JSZip();
     zip.file(imageName, document.getElementById('imageInput').files[0]);
-    
-    // Create JSON file for annotations
-    let jsonBlob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-    zip.file(imageName.split('.').slice(0, -1).join('.') + '_annotations.json', jsonBlob);
 
-    zip.generateAsync({ type: 'blob' }).then(function(content) {
-        let zipLink = document.createElement('a');
-        zipLink.href = URL.createObjectURL(content);
-        zipLink.download = imageName.split('.').slice(0, -1).join('.') + '_annotations.zip';
-        zipLink.click();
+    // Create main JSON file for annotations
+    let jsonBlob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    zip.file(baseName + '_annotations.json', jsonBlob);
+
+    // Loop through each annotation, create cropped image, and save individual JSON
+    annotations.forEach((annotation, index) => {
+        let cropFolder = zip.folder(baseName + '_crop_' + (index + 1));
+
+        // Create cropped image for each annotation
+        let cropCanvas = document.createElement('canvas');
+        let cropCtx = cropCanvas.getContext('2d');
+        cropCanvas.width = annotation.width;
+        cropCanvas.height = annotation.height;
+        cropCtx.drawImage(
+            image,
+            annotation.left, annotation.top, annotation.width, annotation.height,
+            0, 0, annotation.width, annotation.height
+        );
+
+        // Convert cropped image to Blob
+        cropCanvas.toBlob(function(blob) {
+            cropFolder.file(baseName + '_crop_' + (index + 1) + '.png', blob);
+
+            // Create JSON for cropped annotation
+            let cropData = {
+                image: baseName + '_crop_' + (index + 1) + '.png',
+                annotation: annotation
+            };
+            let cropJsonBlob = new Blob([JSON.stringify(cropData, null, 2)], { type: 'application/json' });
+            cropFolder.file(baseName + '_crop_' + (index + 1) + '_annotation.json', cropJsonBlob);
+
+            // If all crops are processed, generate and download ZIP
+            if (index === annotations.length - 1) {
+                zip.generateAsync({ type: 'blob' }).then(function(content) {
+                    let zipLink = document.createElement('a');
+                    zipLink.href = URL.createObjectURL(content);
+                    zipLink.download = baseName + '_annotations.zip';
+                    zipLink.click();
+                });
+            }
+        });
     });
 }
